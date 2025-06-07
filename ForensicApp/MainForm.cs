@@ -12,19 +12,11 @@ namespace ForensicApp
 {
     public partial class MainForm : Form
     {
-        // --- Controles de la UI ---
-        // Los controles de la UI (botones, labels, etc.) se deben agregar
-        // manualmente a través del diseñador de Windows Forms o en el código.
-        // Por ejemplo:
-        // private Label lblTipoSistema;
-        // private ComboBox cmbTipoSistema;
-        // ...y así sucesivamente para los demás controles que necesites.
-        // Asegúrate de que los nombres coincidan con los que uses en el diseñador
-        // o al crearlos manualmente si quieres usar el código de BtnGenerarAnalisis_Click tal cual.
+
 
         // --- Configuración ---
-        private const string GroqApiKey = "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";
-        private const string GroqApiUrl = "https://api.groq.com/openai/v1/chat/completions";
+        private const string GroqApiKey = "";
+        private const string GroqApiUrl = "";
 
         // Reemplaza esto con tu cadena de conexión a SQL Server
         public static string SqlConnectionString = "Server=MSI\\SQLEXPRESS;Database=InvestigacionDigitalApp;Trusted_Connection=True;TrustServerCertificate=True;";        // Ejemplo para LocalDB:
@@ -269,24 +261,12 @@ Proporciona la información de manera clara y organizada bajo cada uno de estos 
                 return;
             }
 
-            // --- Inicio del Parseo (MUY SIMPLIFICADO - DEBES MEJORAR ESTO) ---
-            // Esta es la parte más crítica y específica de tu lógica.
-            // Necesitas extraer de rtbRespuestaAPI.Text la información estructurada
-            // que la API de Groq te dio para el informe de Word.
 
-            // Ejemplo: Asumamos que la API devuelve algo como:
-            // "INFORME WORD:
-            // TITULO: Análisis del Incidente X
-            // CONTENIDO: Este es el cuerpo principal del informe..."
-            // Deberías parsear esto para obtener las partes.
-
-            // Por ahora, usaremos un ejemplo muy básico:
             string contenidoPrincipalDelWord;
-            // Intenta encontrar una sección específica o usa todo el texto como ejemplo
+           
             if (rtbRespuestaAPI.Text.Contains("I. DOCUMENTACIÓN TÉCNICA GENERADA:"))
             {
-                // Podrías intentar extraer secciones específicas aquí.
-                // Por ahora, solo tomaremos una parte del texto para demostrar.
+            
                 contenidoPrincipalDelWord = "Sección de Documentación Técnica:\n" +
                                             rtbRespuestaAPI.Text.Substring(rtbRespuestaAPI.Text.IndexOf("I. DOCUMENTACIÓN TÉCNICA GENERADA:"));
             }
@@ -331,26 +311,17 @@ Proporciona la información de manera clara y organizada bajo cada uno de estos 
                 return;
             }
 
-            // --- Inicio del Parseo (MUY SIMPLIFICADO - DEBES MEJORAR ESTO) ---
-            // En esta versión "original", la lógica de parseo era un marcador de posición.
-            // Se usaban valores de ejemplo o se tomaban directamente de los controles de la UI
-            // sin un análisis complejo de la respuesta de la API.
-
-            // Ejemplo muy básico que usa datos de los controles de la UI y texto fijo:
+           
             string tituloDiapositiva1 = "Resumen del Incidente"; // Este texto debería ser extraído de la respuesta de la API de Groq
 
             string[] puntosSlide1 = {
             "Naturaleza del Incidente: " + (cmbNaturalezaIncidente.SelectedItem?.ToString() ?? "No especificado"),
             "Tipo de Sistema: " + (cmbTipoSistemaa.SelectedItem?.ToString() ?? "No especificado"), // Asegúrate que cmbTipoSistemaa sea el nombre correcto
             "Objetivos de la Investigación: " + txtObjetivosInvestigacion.Text.Trim()
-            // Aquí podrías añadir más puntos fijos o una porción simple de rtbRespuestaAPI.Text como ejemplo.
+            
         };
 
-            // Para generar múltiples diapositivas o contenido más complejo, esta sección de "Parseo"
-            // necesitaría ser mucho más elaborada, y el método GeneradorDocumentos.GenerarPresentacionPowerPoint
-            // también necesitaría ser adaptado para recibir esa estructura de datos más compleja.
-            // --- Fin del Parseo (MUY SIMPLIFICADO) ---
-
+         
 
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -363,10 +334,7 @@ Proporciona la información de manera clara y organizada bajo cada uno de estos 
                     string filePath = saveFileDialog.FileName;
                     try
                     {
-                        // Llamada al método estático de tu clase GeneradorDocumentos.
-                        // En esta etapa "original", el método GenerarPresentacionPowerPoint
-                        // también era muy básico y probablemente solo capaz de manejar
-                        // la información para una diapositiva simple.
+                    
                         GeneradorDocumentos.GenerarPresentacionPowerPoint(filePath, tituloDiapositiva1, puntosSlide1);
 
                         MessageBox.Show($"Presentación de PowerPoint generada exitosamente en:\n{filePath}",
