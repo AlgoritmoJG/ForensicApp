@@ -11,14 +11,11 @@ namespace ForensicApp
     internal class GroqApiClient
     {
 
-       
-      
-            // Asumiendo que tienes las clases GroqRequest, GroqMessage, GroqResponse de antes
-            // y que GroqApiKey y GroqApiUrl están definidas aquí o se pasan como parámetro.
+
 
             private static readonly HttpClient httpClient = new HttpClient();
-            private const string GroqApiKey = "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"; // O toma esto de MainForm o de un archivo de configuración
-            private const string GroqApiUrl = "https://api.groq.com/openai/v1/chat/completions"; // O toma esto de MainForm o de un archivo de configuración
+            private const string GroqApiKey = ""; 
+            private const string GroqApiUrl = ""; 
 
             public static async Task<string> ObtenerRespuestaGroq(string promptContent)
             {
@@ -28,9 +25,7 @@ namespace ForensicApp
                     {
                     new GroqMessage { Role = "user", Content = promptContent }
                     },
-                    Model = "llama3-8b-8192", // O el modelo que estés usando
-                                              // Temperature = 0.7, // Opcional
-                                              // MaxTokens = 1024   // Opcional
+                    Model = "llama3-8b-8192", 
                 };
 
                 var jsonPayload = JsonSerializer.Serialize(requestPayload);
